@@ -1,4 +1,4 @@
-package com.murilo.cursomc.domain;
+package com.murilo.cursomc.domain.categoria.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
