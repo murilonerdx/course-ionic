@@ -1,7 +1,6 @@
-package com.murilo.cursomc.resources;
+package com.murilo.cursomc.domain.categoria.resources;
 
 import com.murilo.cursomc.domain.categoria.service.CategoriaService;
-import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

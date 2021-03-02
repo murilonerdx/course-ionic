@@ -1,5 +1,6 @@
 package com.murilo.cursomc.domain.cidade.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.murilo.cursomc.domain.estado.entity.Estado;
 
 import javax.persistence.*;
@@ -12,6 +13,7 @@ public class Cidade implements Serializable {
     private Integer id;
     private String nome;
 
+    @JsonManagedReference
     @ManyToOne()
     @JoinColumn(name="estado_id")
     private Estado estado;

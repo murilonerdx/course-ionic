@@ -1,5 +1,6 @@
 package com.murilo.cursomc.domain.cliente.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.murilo.cursomc.domain.cliente.enums.TipoCliente;
 import com.murilo.cursomc.domain.endereco.entity.Endereco;
 
@@ -21,7 +22,8 @@ public class Cliente {
     @CollectionTable(name="telefone")
     private Set<String> telefones = new HashSet<>();
 
-    @OneToMany(mappedBy = "cidade")
+    @JsonManagedReference
+    @OneToMany(mappedBy = "cliente")
     private List<Endereco> enderecos = new ArrayList<>();
 
     public Cliente(){}

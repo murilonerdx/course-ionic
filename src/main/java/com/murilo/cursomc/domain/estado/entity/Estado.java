@@ -1,5 +1,6 @@
 package com.murilo.cursomc.domain.estado.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.murilo.cursomc.domain.cidade.entity.Cidade;
 
 import javax.persistence.*;
@@ -13,6 +14,8 @@ public class Estado implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String nome;
+
+    @JsonManagedReference
     @OneToMany()
     private List<Cidade> cidades = new ArrayList<>();
 
