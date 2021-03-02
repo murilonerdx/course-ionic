@@ -1,4 +1,4 @@
-package com.murilo.cursomc.domain.categoria.resources;
+package com.murilo.cursomc.domain.categoria.controller;
 
 import com.murilo.cursomc.domain.categoria.service.CategoriaService;
 import org.springframework.beans.factory.annotation.Autowired;

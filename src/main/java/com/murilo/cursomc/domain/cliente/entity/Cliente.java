@@ -3,6 +3,7 @@ package com.murilo.cursomc.domain.cliente.entity;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.murilo.cursomc.domain.cliente.enums.TipoCliente;
 import com.murilo.cursomc.domain.endereco.entity.Endereco;
+import com.murilo.cursomc.domain.pedido.entity.Pedido;
 
 import javax.persistence.*;
 import java.util.*;
@@ -25,6 +26,9 @@ public class Cliente {
     @JsonManagedReference
     @OneToMany(mappedBy = "cliente")
     private List<Endereco> enderecos = new ArrayList<>();
+
+    @OneToMany()
+    private List<Pedido> pedidos = new ArrayList<>();
 
     public Cliente(){}
 

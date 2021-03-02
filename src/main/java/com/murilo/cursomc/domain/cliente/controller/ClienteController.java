@@ -1,6 +1,5 @@
-package com.murilo.cursomc.domain.cliente.controller;
+package com.murilo.cursomc.domain.cliente.resources;
 
-import com.murilo.cursomc.domain.categoria.service.CategoriaService;
 import com.murilo.cursomc.domain.cliente.service.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
