@@ -1,6 +1,6 @@
 package com.murilo.cursomc.exceptions;
 
-import com.murilo.cursomc.domain.categoria.exceptions.ObjectNotFoundException;
+import com.murilo.cursomc.model.categoria.exceptions.ObjectNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
