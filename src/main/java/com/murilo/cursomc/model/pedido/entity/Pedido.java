@@ -2,11 +2,14 @@ package com.murilo.cursomc.model.pedido.entity;
 
 import com.murilo.cursomc.model.cliente.entity.Cliente;
 import com.murilo.cursomc.model.endereco.entity.Endereco;
+import com.murilo.cursomc.model.itemPedido.entity.ItemPedido;
 import com.murilo.cursomc.model.pagamento.entity.Pagamento;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 public class Pedido implements Serializable {
@@ -26,9 +29,14 @@ public class Pedido implements Serializable {
     @JoinColumn(name="endereco_de_entrega_id")
     private Endereco enderecoDeEntrega;
 
-    public Pedido(Integer id, Date instante) {
+    @OneToMany(mappedBy="id.pedido")
+    private Set<ItemPedido> itens = new HashSet<>();
+
+    public Pedido(Integer id, Date instante, Cliente cliente, Endereco enderecoDeEntrega) {
         this.id = id;
         this.instante = instante;
+        this.cliente = cliente;
+        this.enderecoDeEntrega = enderecoDeEntrega;
     }
 
     public Pedido(){}
@@ -47,5 +55,37 @@ public class Pedido implements Serializable {
 
     public void setInstante(Date instante) {
         this.instante = instante;
+    }
+
+    public Pagamento getPagamento() {
+        return pagamento;
+    }
+
+    public void setPagamento(Pagamento pagamento) {
+        this.pagamento = pagamento;
+    }
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+
+    public Endereco getEnderecoDeEntrega() {
+        return enderecoDeEntrega;
+    }
+
+    public void setEnderecoDeEntrega(Endereco enderecoDeEntrega) {
+        this.enderecoDeEntrega = enderecoDeEntrega;
+    }
+
+    public Set<ItemPedido> getItens() {
+        return itens;
+    }
+
+    public void setItens(Set<ItemPedido> itens) {
+        this.itens = itens;
     }
 }

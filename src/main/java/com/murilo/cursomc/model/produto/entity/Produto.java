@@ -1,12 +1,12 @@
 package com.murilo.cursomc.model.produto.entity;
 
 import com.murilo.cursomc.model.categoria.entity.Categoria;
+import com.murilo.cursomc.model.itemPedido.entity.ItemPedido;
+import com.murilo.cursomc.model.pedido.entity.Pedido;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 @Entity
 public class Produto implements Serializable {
@@ -15,6 +15,11 @@ public class Produto implements Serializable {
     private Integer id;
     private String nome;
     private Double preco;
+
+    @OneToMany(mappedBy="id.produto")
+    private Set<ItemPedido> itens = new HashSet<>();
+
+
 
     @ManyToMany
     @JoinTable(name="PRODUTO_CATEGAORIA",
@@ -61,6 +66,23 @@ public class Produto implements Serializable {
 
     public void setCategorias(List<Categoria> categorias) {
         this.categorias = categorias;
+    }
+
+    public List<Pedido> getPedidos(){
+        List<Pedido> lista = new ArrayList<>();
+        for(ItemPedido x : itens){
+            lista.add(x.getPedido());
+        }
+        return lista;
+    }
+
+
+    public Set<ItemPedido> getItens() {
+        return itens;
+    }
+
+    public void setItens(Set<ItemPedido> itens) {
+        this.itens = itens;
     }
 
     @Override
