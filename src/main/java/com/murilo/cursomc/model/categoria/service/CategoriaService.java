@@ -7,6 +7,9 @@ import com.murilo.cursomc.model.categoria.exceptions.ObjectNotFoundException;
 import com.murilo.cursomc.model.categoria.repository.CategoriaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -47,7 +50,10 @@ public class CategoriaService {
         return repository.findAll();
     }
 
-    public void TransferData(Categoria entity, CategoriaDTO entityDTO){}
+    public Page<Categoria> findPage(Integer page, Integer linesPerPage, String orderBy, String direction) {
+        PageRequest pageRequest = PageRequest.of(page, linesPerPage, Sort.Direction.valueOf(direction), orderBy);
+        return repository.findAll(pageRequest);
+    }
 
 
 
