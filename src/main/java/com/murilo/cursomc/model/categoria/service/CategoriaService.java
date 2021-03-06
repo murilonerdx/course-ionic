@@ -1,9 +1,11 @@
 package com.murilo.cursomc.model.categoria.service;
 
 import com.murilo.cursomc.model.categoria.entity.Categoria;
+import com.murilo.cursomc.model.categoria.exceptions.DataIntegretyException;
 import com.murilo.cursomc.model.categoria.exceptions.ObjectNotFoundException;
 import com.murilo.cursomc.model.categoria.repository.CategoriaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -27,6 +29,16 @@ public class CategoriaService {
     public Categoria update(Categoria obj){
         find(obj.getId());
         return repository.save(obj);
+    }
+
+    public void delete(Integer id){
+        find(id);
+        try{
+            repository.deleteById(id);
+        }catch(DataIntegrityViolationException e){
+            throw new DataIntegretyException("Não fui possivel deletar a Categoria");
+        }
+
     }
 
 
