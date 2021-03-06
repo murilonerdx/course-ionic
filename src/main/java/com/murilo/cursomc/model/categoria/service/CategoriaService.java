@@ -1,5 +1,6 @@
 package com.murilo.cursomc.model.categoria.service;
 
+import com.murilo.cursomc.model.categoria.dto.CategoriaDTO;
 import com.murilo.cursomc.model.categoria.entity.Categoria;
 import com.murilo.cursomc.model.categoria.exceptions.DataIntegretyException;
 import com.murilo.cursomc.model.categoria.exceptions.ObjectNotFoundException;
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -40,6 +42,12 @@ public class CategoriaService {
         }
 
     }
+
+    public List<Categoria> findAll(){
+        return repository.findAll();
+    }
+
+    public void TransferData(Categoria entity, CategoriaDTO entityDTO){}
 
 
 
