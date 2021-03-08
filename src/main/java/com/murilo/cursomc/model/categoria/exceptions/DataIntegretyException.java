@@ -9,6 +9,6 @@ public class DataIntegretyException extends RuntimeException{
 
     @Override
     public String getMessage() {
-        return "Não foi possivel deletar item do banco"; // Mensagem
+        return nomeDoAtributo; // Mensagem
     }
 }
