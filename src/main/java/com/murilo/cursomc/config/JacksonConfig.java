@@ -1,8 +1,11 @@
 package com.murilo.cursomc.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import com.murilo.cursomc.model.pagamento.entity.PagamentoComBoleto;
 import com.murilo.cursomc.model.pagamento.entity.PagamentoComCartao;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
