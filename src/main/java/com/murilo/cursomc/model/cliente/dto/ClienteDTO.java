@@ -1,11 +1,14 @@
 package com.murilo.cursomc.model.cliente.dto;
 
 import com.murilo.cursomc.model.cliente.entity.Cliente;
+import com.murilo.cursomc.model.cliente.service.validation.ClienteInsert;
+import com.murilo.cursomc.model.cliente.service.validation.ClienteUpdate;
 import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 
+@ClienteUpdate
 public class ClienteDTO {
     private Integer id;
 

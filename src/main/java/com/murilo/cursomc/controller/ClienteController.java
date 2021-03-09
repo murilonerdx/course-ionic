@@ -3,6 +3,7 @@ package com.murilo.cursomc.controller;
 import com.murilo.cursomc.model.categoria.dto.CategoriaDTO;
 import com.murilo.cursomc.model.categoria.entity.Categoria;
 import com.murilo.cursomc.model.cliente.dto.ClienteDTO;
+import com.murilo.cursomc.model.cliente.dto.ClienteNewDTO;
 import com.murilo.cursomc.model.cliente.entity.Cliente;
 import com.murilo.cursomc.model.cliente.service.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,29 +29,29 @@ public class ClienteController {
         return ResponseEntity.ok().body(obj);
     }
 
-    @RequestMapping(method=RequestMethod.POST)
-    public ResponseEntity<Void> insert(@Valid @RequestBody ClienteDTO objDTO){
+    @RequestMapping(method = RequestMethod.POST)
+    public ResponseEntity<Void> insert(@Valid @RequestBody ClienteNewDTO objDTO) {
         Cliente obj = service.fromDTO(objDTO);
         obj = service.insert(obj);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
         return ResponseEntity.created(uri).build();
     }
 
-    @RequestMapping(value="/{id}", method=RequestMethod.PUT)
+    @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
     public ResponseEntity<Cliente> update(@PathVariable Integer id, @RequestBody Cliente obj) {
         obj.setId(id);
         service.update(obj);
         return ResponseEntity.noContent().build();
     }
 
-    @RequestMapping(value="/{id}", method=RequestMethod.DELETE)
-    public ResponseEntity<Void> delete(@PathVariable Integer id){
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    public ResponseEntity<Void> delete(@PathVariable Integer id) {
         service.delete(id);
         return ResponseEntity.noContent().build();
     }
 
-    @RequestMapping(method=RequestMethod.GET)
-    public ResponseEntity<List<ClienteDTO>> findAll(){
+    @RequestMapping(method = RequestMethod.GET)
+    public ResponseEntity<List<ClienteDTO>> findAll() {
         List<Cliente> listaCategoria = service.findAll();
         List<ClienteDTO> listaDTO = listaCategoria.stream().map(ClienteDTO::new).collect(Collectors.toList());
         return ResponseEntity.ok().body(listaDTO);
