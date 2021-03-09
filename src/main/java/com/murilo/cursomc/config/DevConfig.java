@@ -24,6 +24,7 @@ import com.murilo.cursomc.model.produto.entity.Produto;
 import com.murilo.cursomc.model.produto.repository.ProdutoRepository;
 import com.murilo.cursomc.utils.DbService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -40,9 +41,19 @@ public class DevConfig {
     @Autowired
     private DbService dbService;
 
+    @Value("${spring.jpa.hibernate.ddl-auto}")
+    private String strategy;
+
     @Bean
     public boolean instantiateDatabase() throws ParseException {
+
+        if (!"create".equals(strategy)) {
+            return false;
+        }
+
         dbService.instantiateTestDatabase();
         return true;
     }
+
+   
 }
