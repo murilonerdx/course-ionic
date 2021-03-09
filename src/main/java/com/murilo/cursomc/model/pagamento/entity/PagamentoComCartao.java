@@ -2,10 +2,12 @@ package com.murilo.cursomc.model.pagamento.entity;
 
 import javax.persistence.Entity;
 
+import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.murilo.cursomc.model.pagamento.enums.EstadoPagamento;
 import com.murilo.cursomc.model.pedido.entity.Pedido;
 
 @Entity
+@JsonTypeName("pagamentoComCartao")
 public class PagamentoComCartao extends Pagamento {
 	private static final long serialVersionUID = 1L;
 
