@@ -2,6 +2,7 @@ package com.murilo.cursomc.model.pedido.service;
 
 import com.murilo.cursomc.model.categoria.exceptions.ObjectNotFoundException;
 import com.murilo.cursomc.model.cliente.entity.Cliente;
+import com.murilo.cursomc.model.cliente.service.ClienteService;
 import com.murilo.cursomc.model.itemPedido.entity.ItemPedido;
 import com.murilo.cursomc.model.itemPedido.repository.ItemPedidoRepository;
 import com.murilo.cursomc.model.pagamento.entity.PagamentoComBoleto;
@@ -34,6 +35,9 @@ public class PedidoService {
     private ProdutoService produtoService;
 
     @Autowired
+    private ClienteService clienteService;
+
+    @Autowired
     private ItemPedidoRepository itemPedidoRepository;
 
     public Pedido find(Integer id) {
@@ -45,6 +49,7 @@ public class PedidoService {
     public Pedido insert(Pedido pedido) {
         pedido.setId(null);
         pedido.setInstante(new Date());
+        pedido.setCliente(clienteService.find(pedido.getCliente().getId()));
         pedido.getPagamento().setEstado(EstadoPagamento.PENDENTE);
         pedido.getPagamento().setPedido(pedido);
         if (pedido.getPagamento() instanceof PagamentoComBoleto) {
@@ -55,10 +60,12 @@ public class PedidoService {
         pagamentoRepository.save(pedido.getPagamento());
         for (ItemPedido ip : pedido.getItens()) {
             ip.setDesconto(0.0);
-            ip.setPreco(produtoService.find(ip.getProduto().getId()).getPreco());
+            ip.setProduto(produtoService.find(ip.getProduto().getId()));
+            ip.setPreco(ip.getProduto().getPreco());
             ip.setPedido(pedido);
         }
         itemPedidoRepository.saveAll(pedido.getItens());
+        System.out.println(pedido);
         return pedido;
     }
 

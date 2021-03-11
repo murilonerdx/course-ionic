@@ -11,8 +11,7 @@ import com.murilo.cursomc.model.pedido.entity.Pedido;
 
 @Entity
 @JsonTypeName("pagamentoComBoleto")
-public class PagamentoComBoleto extends Pagamento {
-	private static final long serialVersionUID = 1L;
+public class PagamentoComBoleto extends Pagamento{
 
 	@JsonFormat(pattern="dd/MM/yyyy")
 	private Date dataVencimento;
@@ -45,6 +44,7 @@ public class PagamentoComBoleto extends Pagamento {
 
 	public void setDataPagamento(Date dataPagamento) {
 		this.dataPagamento = dataPagamento;
-	}	
-	
+	}
+
+
 }
