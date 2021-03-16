@@ -12,6 +12,7 @@ import com.murilo.cursomc.model.pedido.entity.Pedido;
 import com.murilo.cursomc.model.pedido.repository.PedidoRepository;
 import com.murilo.cursomc.model.produto.repository.ProdutoRepository;
 import com.murilo.cursomc.model.produto.service.ProdutoService;
+import com.murilo.cursomc.utils.EmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -40,6 +41,9 @@ public class PedidoService {
     @Autowired
     private ItemPedidoRepository itemPedidoRepository;
 
+    @Autowired
+    private EmailService emailService;
+
     public Pedido find(Integer id) {
         Optional<Pedido> obj = repository.findById(id);
         return obj.orElseThrow(() -> new ObjectNotFoundException(
@@ -65,7 +69,7 @@ public class PedidoService {
             ip.setPedido(pedido);
         }
         itemPedidoRepository.saveAll(pedido.getItens());
-        System.out.println(pedido);
+        emailService.sendOrderConfirmationHtmlEmail(pedido);
         return pedido;
     }
 

@@ -23,6 +23,8 @@ import com.murilo.cursomc.model.pedido.repository.PedidoRepository;
 import com.murilo.cursomc.model.produto.entity.Produto;
 import com.murilo.cursomc.model.produto.repository.ProdutoRepository;
 import com.murilo.cursomc.utils.DbService;
+import com.murilo.cursomc.utils.EmailService;
+import com.murilo.cursomc.utils.SmtpEmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
@@ -53,6 +55,11 @@ public class DevConfig {
 
         dbService.instantiateTestDatabase();
         return true;
+    }
+
+    @Bean
+    public EmailService emailService(){
+        return new SmtpEmailService();
     }
 
 
