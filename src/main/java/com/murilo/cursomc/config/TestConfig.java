@@ -23,6 +23,8 @@ import com.murilo.cursomc.model.pedido.repository.PedidoRepository;
 import com.murilo.cursomc.model.produto.entity.Produto;
 import com.murilo.cursomc.model.produto.repository.ProdutoRepository;
 import com.murilo.cursomc.utils.DbService;
+import com.murilo.cursomc.utils.EmailService;
+import com.murilo.cursomc.utils.MockEmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
@@ -44,5 +46,10 @@ public class TestConfig {
     public boolean instantiateDatabase() throws ParseException {
         dbService.instantiateTestDatabase();
         return true;
+    }
+
+    @Bean
+    public EmailService emailService(){
+        return new MockEmailService();
     }
 }
