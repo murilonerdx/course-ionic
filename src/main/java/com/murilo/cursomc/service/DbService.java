@@ -1,4 +1,4 @@
-package com.murilo.cursomc.utils;
+package com.murilo.cursomc.service;
 
 import com.murilo.cursomc.model.categoria.entity.Categoria;
 import com.murilo.cursomc.model.categoria.repository.CategoriaRepository;

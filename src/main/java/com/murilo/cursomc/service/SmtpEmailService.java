@@ -1,4 +1,4 @@
-package com.murilo.cursomc.utils;
+package com.murilo.cursomc.service;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

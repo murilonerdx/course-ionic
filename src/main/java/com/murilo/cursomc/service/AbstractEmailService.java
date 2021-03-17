@@ -1,8 +1,7 @@
-package com.murilo.cursomc.utils;
+package com.murilo.cursomc.service;
 
 import com.murilo.cursomc.model.cliente.entity.Cliente;
 import com.murilo.cursomc.model.pedido.entity.Pedido;
-import org.hibernate.sql.Template;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.SimpleMailMessage;
