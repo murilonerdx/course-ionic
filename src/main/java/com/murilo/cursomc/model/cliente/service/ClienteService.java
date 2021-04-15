@@ -1,5 +1,6 @@
 package com.murilo.cursomc.model.cliente.service;
 
+import com.murilo.cursomc.exceptions.AuthorizationException;
 import com.murilo.cursomc.model.categoria.dto.CategoriaDTO;
 import com.murilo.cursomc.model.categoria.entity.Categoria;
 import com.murilo.cursomc.model.categoria.exceptions.DataIntegretyException;
@@ -9,10 +10,13 @@ import com.murilo.cursomc.model.cidade.repository.CidadeRepository;
 import com.murilo.cursomc.model.cliente.dto.ClienteDTO;
 import com.murilo.cursomc.model.cliente.dto.ClienteNewDTO;
 import com.murilo.cursomc.model.cliente.entity.Cliente;
+import com.murilo.cursomc.model.cliente.enums.Perfil;
 import com.murilo.cursomc.model.cliente.enums.TipoCliente;
 import com.murilo.cursomc.model.cliente.repository.ClienteRepository;
 import com.murilo.cursomc.model.endereco.entity.Endereco;
 import com.murilo.cursomc.model.endereco.repository.EnderecoRepository;
+import com.murilo.cursomc.security.UserSS;
+import com.murilo.cursomc.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
@@ -40,6 +44,10 @@ public class ClienteService {
     private BCryptPasswordEncoder bc;
 
     public Cliente find(Integer id) {
+        UserSS user = UserService.authenticated();
+        if(user==null || user.hasRole(Perfil.ADMIN) && !id.equals(user.getId())){
+            throw new AuthorizationException("Acesso negado");
+        }
         Optional<Cliente> obj = repository.findById(id);
         return obj.orElseThrow(() -> new ObjectNotFoundException(
                 "Objeto não encontrado! Id: " + id + ", Tipo: " + Cliente.class.getName()));
@@ -59,6 +67,7 @@ public class ClienteService {
 
     public Cliente update(Cliente obj) {
         try {
+
             Cliente cliente = find(obj.getId());
             updateData(obj, cliente);
             return repository.save(obj);
@@ -93,7 +102,8 @@ public class ClienteService {
     public Cliente fromDTO(ClienteNewDTO objDTO) {
         Cliente cli = new Cliente(null, objDTO.getNome(), objDTO.getEmail(), objDTO.getCpfOuCnpj(), TipoCliente.toEnum(objDTO.getTipo()), bc.encode(objDTO.getSenha()));
         Cidade cid = cidadeRepository.getOne(objDTO.getCidadeId());
-        Endereco end = new Endereco(null, objDTO.getLogradouro(),
+        Endereco end = new Endereco(null,
+                objDTO.getLogradouro(),
                 objDTO.getNumero(),
                 objDTO.getComplemento(),
                 objDTO.getBairro(),
