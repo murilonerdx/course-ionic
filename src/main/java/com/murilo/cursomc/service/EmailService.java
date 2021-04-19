@@ -1,5 +1,6 @@
 package com.murilo.cursomc.service;
 
+import com.murilo.cursomc.model.cliente.entity.Cliente;
 import com.murilo.cursomc.model.pedido.entity.Pedido;
 import org.springframework.mail.SimpleMailMessage;
 
@@ -13,4 +14,6 @@ public interface EmailService {
     void sendOrderConfirmationHtmlEmail(Pedido obj);
 
     void sendHtmlEmail(MimeMessage msg);
+
+    void sendNewPasswordEmail(Cliente cliente, String newPass);
 }

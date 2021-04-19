@@ -83,4 +83,5 @@ public abstract class AbstractEmailService implements EmailService {
         mmh.setText(htmlFromTemplatePedido(obj),true);
         return mimeMessage;
     }
+
 }
