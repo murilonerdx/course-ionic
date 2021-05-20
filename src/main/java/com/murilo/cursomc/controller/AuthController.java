@@ -26,7 +26,7 @@ public class AuthController {
 
     @RequestMapping(value = "/refresh_token", method = RequestMethod.POST)
     public ResponseEntity<Void> refreshToken(HttpServletResponse response) {
-        UserSS user = UserService.authenticated();
+        UserSS user = UserService.authenticatedUser();
         String token = jwtUtil.generateToken(user.getUsername());
         response.addHeader("Authorization", "Bearer " + token);
         return ResponseEntity.noContent().build();
