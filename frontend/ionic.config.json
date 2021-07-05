@@ -1,5 +1,8 @@
 {
-  "name": "frontend",
-  "integrations": {},
-  "type": "angular"
+  "name": "CursoSpringIonic",
+  "app_id": "",
+  "type": "ionic-angular",
+  "integrations": {
+    "cordova": {}
+  }
 }
